@@ -13,7 +13,7 @@ class CreateChatCommand(BaseCommand):
 
 
 @dataclass(frozen=True)
-class CreateChatCommandHandler(CommandHadler[CreateChatCommand,Chat]):  
+class CreateChatCommandHandler(CommandHadler[CreateChatCommand, Chat]):
     chat_repository: BaseChatRepository
 
     async def handle(self, command: CreateChatCommand) -> Chat:
@@ -23,5 +23,3 @@ class CreateChatCommandHandler(CommandHadler[CreateChatCommand,Chat]):
         new_chat = Chat.create_chat(title=title)
         await self.chat_repository.add_chat(new_chat)
         return new_chat
-
-

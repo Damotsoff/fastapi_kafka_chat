@@ -30,11 +30,17 @@ class Chat(BaseEntity):
 
     def __eq__(self, __value: "Chat") -> bool:
         return self.oid == __value.oid
+
     @classmethod
-    def create_chat(cls,title: Title) -> "Chat":
+    def create_chat(cls, title: Title) -> "Chat":
         new_chat = cls(title=title)
-        new_chat.register_event(NewChatCreated(chat_oid=new_chat.oid,title=new_chat.title.as_generic_type()))
+        new_chat.register_event(
+            NewChatCreated(
+                chat_oid=new_chat.oid, title=new_chat.title.as_generic_type()
+            )
+        )
         return new_chat
+
     def add_message(self, message: Message):
         self.messages.add(message)
         self.register_event(
