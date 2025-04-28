@@ -1,6 +1,5 @@
 from dataclasses import dataclass, field
 from datetime import datetime
-from uuid import uuid4
 from domain.entities.base import BaseEntity
 from domain.events.message import NewChatCreated, NewMessageRecievedEvent
 from domain.values.messages import Text, Title
@@ -8,8 +7,6 @@ from domain.values.messages import Text, Title
 
 @dataclass
 class Message(BaseEntity):
-
-    created_at: datetime = field(default_factory=lambda: datetime.now(), kw_only=True)
     text: Text
 
     def __hash__(self) -> int:
@@ -21,7 +18,7 @@ class Message(BaseEntity):
 
 @dataclass
 class Chat(BaseEntity):
-    created_at: datetime = field(default_factory=lambda: datetime.now(), kw_only=True)
+
     title: str = Title
     messages: set[Message] = field(default_factory=set, kw_only=True)
 

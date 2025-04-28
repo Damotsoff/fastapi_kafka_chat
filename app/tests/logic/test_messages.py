@@ -2,7 +2,7 @@ import pytest
 from faker import Faker
 from domain.entities.messages import Chat
 from domain.values.messages import Title
-from infra.repositories.messages import BaseChatRepository
+from infra.repositories.messages.base import BaseChatRepository
 from logic.commands.messages import CreateChatCommand
 from logic.exceptions.messages import ChatWithThatTitleAlreadyExistsException
 from logic.mediator import Mediator
@@ -22,8 +22,7 @@ async def test_create_chat_command_success(
 
 @pytest.mark.asyncio
 async def test_create_chat_command_title_already_exsists(
-    chat_repository: BaseChatRepository, mediator: Mediator, 
-    faker: Faker
+    chat_repository: BaseChatRepository, mediator: Mediator, faker: Faker
 ):
     title_text = faker.text()
     chat = Chat(title=Title(value=title_text))

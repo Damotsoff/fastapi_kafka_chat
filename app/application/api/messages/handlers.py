@@ -25,7 +25,9 @@ router = APIRouter(
         status.HTTP_400_BAD_REQUEST: {"model": ErrorSchema},
     },
 )
-async def create_chat_handler(schema: CreateChatRequestSchema,container=Depends(init_container)):
+async def create_chat_handler(
+    schema: CreateChatRequestSchema, container=Depends(init_container)
+):
     mediator: Mediator = container.resolve(Mediator)
     try:
         chat, *_ = await mediator.handle_command(CreateChatCommand(title=schema.title))
