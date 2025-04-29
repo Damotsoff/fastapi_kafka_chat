@@ -1,5 +1,4 @@
 from dataclasses import dataclass, field
-from datetime import datetime
 from domain.entities.base import BaseEntity
 from domain.events.message import NewChatCreated, NewMessageRecievedEvent
 from domain.values.messages import Text, Title
